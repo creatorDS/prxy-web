@@ -1,7 +1,7 @@
 const urlInput = document.getElementById('url');
 const proxyButton = document.getElementById('proxyButton');
 const proxyFrame = document.getElementById('proxyFrame');
-const backendURL = 'https://proxy-web.onrender.com'; // Reemplaza con la URL de tu aplicación Render
+const backendURL = 'https://prxy-web.onrender.com'; // Reemplaza con la URL de tu aplicación Render
 
 
 proxyButton.addEventListener('click', async () => {
