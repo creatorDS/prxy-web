@@ -1,8 +1,7 @@
 const urlInput = document.getElementById('url');
 const proxyButton = document.getElementById('proxyButton');
 const proxyFrame = document.getElementById('proxyFrame');
-const backendURL = 'https://prxy-web.onrender.com'; // Reemplaza con la URL de tu aplicación Render
-
+const backendURL = ''; // Backend en el mismo dominio
 
 proxyButton.addEventListener('click', async () => {
     const url = urlInput.value;
@@ -25,6 +24,7 @@ proxyButton.addEventListener('click', async () => {
             const errorData = await response.json();
             throw new Error(errorData.error || 'Proxy request failed');
         }
+
         //  Asignar la URL al iframe para que se cargue el contenido
         proxyFrame.src = url;
 
