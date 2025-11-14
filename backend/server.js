@@ -3,12 +3,16 @@ require('dotenv').config(); // Cargar variables de entorno desde .env
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors'); // Habilitar CORS (Cross-Origin Resource Sharing)
+const path = require('path'); // Importar el módulo 'path'
 const app = express();
 const port = process.env.PORT || 3000; // Usar el puerto definido en el entorno o 3000 por defecto
 
 // Middleware para analizar el cuerpo de las solicitudes como JSON
 app.use(express.json());
 app.use(cors()); // Habilitar CORS para todas las rutas
+
+// Servir archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Ruta proxy
 app.post('/proxy', async (req, res) => {
@@ -33,6 +37,11 @@ app.post('/proxy', async (req, res) => {
         console.error('Proxy error:', error);
         res.status(500).json({ error: 'Proxy request failed', details: error.message });
     }
+});
+
+// Enviar el archivo index.html para cualquier otra ruta (para que el frontend se encargue de la navegación)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 app.listen(port, () => {
